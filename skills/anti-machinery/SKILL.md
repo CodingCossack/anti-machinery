@@ -21,7 +21,7 @@ Discovery legitimately produces many tests; durable proof needs few. Keep one cl
 
 ## Gates guard risks, not themselves
 
-Release gates, canaries, and CI checks carry the same burden as any machinery, plus one of their own: they must name not only the recurrence they guard but the ways they can fail while the product is healthy. A gate that blocks for reasons other than its risk is defective machinery — prefer moving the proof to a cheaper seam over repairing the gate in place. When proof apparatus starts to need its own proof apparatus — a test for the canary, a fix for the fixer's fix — stop building. That recursion is evidence the proof sits at the wrong seam or relies on a mechanism too clever to trust; redesign the proof rather than reinforcing it.
+Release gates, canaries, and CI checks carry the same burden as any machinery, plus one of their own: they must name not only the recurrence they guard but the ways they can fail while the product is healthy. A gate that blocks for reasons other than its risk is defective machinery — prefer moving the proof to a cheaper seam over repairing the gate in place. A focused test of a gate's distinct decision logic is ordinary proof, not recursion. When a gate needs apparatus that merely re-proves the same assertion or compensates for its own unreliable mechanism — a canary fix that needs a leak-proof harness, a fix for the fixer's fix — stop building. That recursion is evidence the proof sits at the wrong seam or relies on a mechanism too clever to trust; redesign the proof rather than reinforcing it.
 
 ## After the fire
 
