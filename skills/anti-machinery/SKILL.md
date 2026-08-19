@@ -1,6 +1,6 @@
 ---
 name: anti-machinery
-description: Use for non-trivial software work — design, planning, investigation, implementation, debugging, refactoring, migration, testing, review, release, or cleanup — whenever the work may create, retain, or approve supporting apparatus such as tests, scripts, harnesses, reports, flags, adapters, caches, compatibility paths, abstractions, debug surfaces, orchestration, or process documents. Governs what may exist permanently after the task closes. Use alongside change-with-proof when existing behaviour is at stake.
+description: Use when software work creates, keeps, or approves supporting apparatus — tests, scripts, harnesses, flags, adapters, caches, compatibility paths, abstractions, debug surfaces, reports, process documents — and above all at task close, review, or cleanup, when deciding what may remain permanent. Apparatus earns permanence only through a continuing consumer, a recurring risk, or a bounded transition it carries. Do not use to decide whether the product change itself is correct or proven; pair with change-with-proof for that.
 ---
 
 # Anti-Machinery
@@ -17,7 +17,7 @@ The same rule governs building: structure justified by a predicted future consum
 
 ## Tests are machinery
 
-Discovery legitimately produces many tests; durable proof needs few. Keep one clear proof per distinct risk that can recur — a contract, a boundary, a fixed bug — at the cheapest seam where the proof would actually fail if the risk returned. A test that re-proves the same rule at an adjacent layer, encodes a disproved theory, or restates the implementation adds maintenance and noise but no failure it alone would catch; it leaves with the investigation that produced it.
+Discovery legitimately produces many tests; durable proof needs few. Keep one clear proof per distinct risk that can recur — a contract, a boundary, a fixed bug — at the cheapest seam where the proof would actually fail if the risk returned. A test that re-proves the same rule at an adjacent layer, encodes a disproved theory, or restates the implementation adds maintenance and noise but no failure it alone would catch; it leaves with the investigation that produced it. What stays is decided by one question — would this proof alone catch a real recurrence? — never by age or origin: each rule an artefact enforces is its own risk, and a proof born during an incident, or covering a rule adjacent to the one fixed, is still the only guard that rule has. Dropping a rule's only proof is deletion of proof, not of duplication.
 
 ## Gates guard risks, not themselves
 
