@@ -11,13 +11,21 @@ Everything built in service of a task — code structure, tests, scripts, flags,
 
 While solving, build whatever the problem demands — probes, one-off scripts, wide experiments, throwaway harnesses. Spend freely; keep it off the supported path and treat it as scheduled for deletion.
 
-When the task closes, the burden reverses: whatever remains must name its continuing need — the consumer that will invoke it, the recurrence it guards, or the transition it carries for a consumer that still exists, together with the observable condition that ends it. Sunk effort, "might be useful", reviewer comfort, and generalised safety name no need. When the need is real but smaller than the artefact, shrink the artefact to the need.
+When the task closes, the burden reverses: whatever remains must name its continuing need — the consumer that will invoke it, the recurrence it guards, or the transition it carries for a consumer that still exists, together with the observable condition that ends it. A stated end condition is not an end condition: wire it to something that will actually fire — a check that fails past the deadline, a scheduled removal, an expiry in the code itself. A comment naming a date will outlive the date. Sunk effort, "might be useful", reviewer comfort, and generalised safety name no need. When the need is real but smaller than the artefact, shrink the artefact to the need.
 
 The same rule governs building: structure justified by a predicted future consumer fails it in advance. Let the second concrete case reveal the boundary rather than guessing it.
 
 ## Tests are machinery
 
 Discovery legitimately produces many tests; durable proof needs few. Keep one clear proof per distinct risk that can recur — a contract, a boundary, a fixed bug — at the cheapest seam where the proof would actually fail if the risk returned. A test that re-proves the same rule at an adjacent layer, encodes a disproved theory, or restates the implementation adds maintenance and noise but no failure it alone would catch; it leaves with the investigation that produced it.
+
+## Gates guard risks, not themselves
+
+Release gates, canaries, and CI checks carry the same burden as any machinery, plus one of their own: they must name not only the recurrence they guard but the ways they can fail while the product is healthy. A gate that blocks for reasons other than its risk is defective machinery — prefer moving the proof to a cheaper seam over repairing the gate in place. When proof apparatus starts to need its own proof apparatus — a test for the canary, a fix for the fixer's fix — stop building. That recursion is evidence the proof sits at the wrong seam or relies on a mechanism too clever to trust; redesign the proof rather than reinforcing it.
+
+## After the fire
+
+Incident pressure defeats the two-lives split: exploration lands directly on supported paths, and the task "closes" with a deploy, so the reversal of burden never runs. When an incident closes, everything it added to permanent paths gets re-justified as if proposed fresh in calm conditions, and the default answer is deletion. Judge the pile, not only the pieces — supporting machinery must stay proportionate to the product it supports, and each individually defensible addition is no defence of the total.
 
 ## Scale from the mechanism
 
