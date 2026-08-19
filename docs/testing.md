@@ -33,6 +33,7 @@ Task: "close this work out for merge."
 | This skill (revised wording), 2 runs | All of it | All 4 decision rules, expiry included (2/2) |
 | change-with-proof alone | All of it | All 4, plus a counterfactual against the baseline commit |
 | Both skills | All of it | All 4 |
+| Both skills, final wording of each | All of it | All 4 rules (status rows consolidated into one table test, expiry kept), plus a counterfactual against the pre-fix baseline |
 
 Two findings:
 
