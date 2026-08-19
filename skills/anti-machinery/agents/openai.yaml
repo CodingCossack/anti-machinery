@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anti-Machinery"
+  short_description: "Permanent machinery must earn its carrying cost"
+  default_prompt: "Use $anti-machinery to deliver the outcome with the smallest justified permanent surface, alongside $change-with-proof when existing behaviour is at stake."
