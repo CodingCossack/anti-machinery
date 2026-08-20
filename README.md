@@ -4,13 +4,34 @@
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-111827)](https://agentskills.io/)
 [![MIT License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
-An agent skill for preventing temporary software-development apparatus from becoming permanent
-maintenance debt. It governs tests, scripts, harnesses, flags, adapters, caches, compatibility
-paths, abstractions, debug surfaces, orchestration, and process documents.
+An agent skill for one recurring failure of agent-driven development: the apparatus built
+*while* solving a task — extra tests, debug flags, replay harnesses, one-off scripts,
+compatibility shims, speculative abstractions, process documents — quietly becomes permanent
+codebase the moment the task closes, and someone maintains it forever.
 
-The rule is simple: build whatever investigation requires, then remove it before completion
-unless it serves a real continuing consumer, recurring risk, or live transition. Keep the
-smallest artefact that meets that need.
+The rule the skill enforces is a reversal of burden. While solving, build whatever the
+problem demands, freely. When the task closes, everything that remains must name its
+continuing need — the consumer that will invoke it, the recurring risk it alone would catch,
+or the live transition it carries — and the condition that ends it. "It helped once",
+"might be useful", and "someone may depend on it" name no need.
+
+Concretely, after a debugging incident:
+
+| Artefact | Verdict |
+|---|---|
+| One focused test that would fail if the fixed bug returned | **Keep** — it alone catches a recurrence |
+| A test for every rule the changed code enforces, merged into one table | **Keep** — each rule is its own risk |
+| Three tests encoding the disproved first theory of the bug | Delete — they guard nothing |
+| The synthetic-replay harness that reproduced the incident | Delete — its consumer was the investigation |
+| A `DEBUG_*` flag wired into production code | Delete — incident-only surface |
+| The investigation notes file | Delete — the commit message carries the story |
+| A feature flag whose rollout finished | Delete, or wire an expiry that actually fires |
+
+The skill also covers the harder boundaries: release gates and canaries must guard product
+risk, not their own mechanism (a fix for the fixer's fix means the proof sits at the wrong
+seam); incident-shipped machinery gets re-justified in calm conditions; scale tests take
+their scale from the failure mechanism, not an impressive number; and deletion of artefacts
+that predate the task needs consumer evidence, not just a clean grep.
 
 ## Install
 
@@ -35,19 +56,6 @@ $skill-installer install https://github.com/CodingCossack/anti-machinery/tree/ma
 
 The skill follows the open Agent Skills format and has no harness-specific dependency.
 
-## What it governs
-
-- **Two lives:** temporary investigative machinery is cheap; permanent supported machinery
-  must name its continuing need.
-- **Tests:** retain one proof per distinct recurring risk at the cheapest seam that can catch
-  its return. Remove duplicate or theory-specific investigation tests.
-- **Scale:** derive load from the failure mechanism or a named threshold, not an impressive
-  arbitrary number.
-- **Deletion:** remove new or directly superseded unused artefacts. Treat older unknown
-  artefacts as candidates until their static, dynamic, and external consumers are checked.
-- **Abstraction:** wait for a second concrete consumer to reveal the boundary instead of
-  building for a predicted future use.
-
 ## With Change with Proof
 
 [`change-with-proof`](https://github.com/CodingCossack/change-with-proof) determines what must
@@ -58,6 +66,12 @@ They are independent skills and can be installed or invoked separately.
 Use $anti-machinery with $change-with-proof to implement this change, prove it, and remove
 temporary or redundant supporting apparatus before completion.
 ```
+
+## Testing
+
+Behavioural changes are gated by pressure scenarios run against real coding agents on
+fixture repositories, with no-skill and paired-skill controls; results are recorded in
+[docs/testing.md](docs/testing.md). Run `./scripts/validate.sh` for structural checks.
 
 ## Structure
 
